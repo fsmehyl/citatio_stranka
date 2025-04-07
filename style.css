@@ -1,12 +1,10 @@
-h2 {
-    color:rgb(75, 72, 72);
-}
-
-/* --- Základné nastavenia (väčšinou zostávajú) --- */
+/* --- Základné nastavenia --- */
 :root {
     --primary-color: #007bff;
     --primary-hover-color: #0056b3;
     --text-color: #333;
+    --heading-color: #333; /* Pridané pre H1 - môžeme zmeniť */
+    --h2-color: rgb(75, 72, 72); /* Farba pre H2 podľa požiadavky */
     --subtitle-color: #555;
     --background-color: #f8f9fa;
     --container-bg: #ffffff;
@@ -31,22 +29,19 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* Odstránené justify-content a align-items pre lepšie centrovanie len kontajnera */
+    align-items: center; /* Centrovanie obsahu horizontálne */
     min-height: 100vh;
     padding: 20px;
-    /* Skrytie štandardného kurzora */
-    overflow-x: hidden; /* Zabráni horizontálnemu posúvaniu, ak ikony vyletia mimo */
+    overflow-x: hidden; /* Zabráni horizontálnemu posúvaniu */
 }
 
 /* --- Štýl pre "padajúce" ikony --- */
 .falling-icon {
-    position: fixed; /* Použijeme fixed, aby pozícia bola relatívna k oknu */
-    /* alebo absolute, ak ich chceme pridávať do iného kontajnera */
-    pointer-events: none; /* Aby ikony neblokovali interakciu */
-    z-index: 9998; /* Tesne pod prípadným vlastným kurzorom, ak by nejaký bol */
-    font-size: 1.5rem; /* Veľkosť emoji */
-    /* Animácia */
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    font-size: 1.5rem;
     animation: fallAndFade 3s ease-out forwards;
 }
 
@@ -57,18 +52,12 @@ body {
         opacity: 1;
     }
     100% {
-        transform: translateY(500px) rotate(90deg); /* Padá dole a trochu sa otáča */
+        transform: translateY(500px) rotate(90deg);
         opacity: 0;
     }
 }
 
-/* --- Zvyšok CSS (kontajner, tlačidlo, atď.) --- */
-
-/* Skrytie štandardného kurzora pre prvky, s ktorými sa dá interagovať */
-a:hover, button:hover, .btn:hover {
-    cursor: none;
-}
-
+/* --- Hlavný kontajner --- */
 .container {
     background-color: var(--container-bg);
     padding: 40px;
@@ -77,18 +66,28 @@ a:hover, button:hover, .btn:hover {
     text-align: center;
     max-width: 700px;
     width: 100%;
+    margin-top: 30px; /* Pridaný horný okraj pre odsadenie */
     margin-bottom: 30px;
-    position: relative; /* Dôležité pre z-index, ak by ikony mali byť pod ním */
+    position: relative;
     z-index: 1;
 }
 
+/* --- Nadpisy --- */
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 15px;
-    color: var(--text-color);
+    color: var(--heading-color); /* Použitie premennej */
 }
 
+h2 {
+    color: var(--h2-color); /* Použitie premennej (alebo priamo farby) */
+    font-size: 1.5rem; /* Príklad veľkosti, uprav podľa potreby */
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* --- Podnadpis / Subtitle --- */
 .subtitle {
     font-size: 1.1rem;
     color: var(--subtitle-color);
@@ -98,22 +97,43 @@ h1 {
     margin-right: auto;
 }
 
-.image-wrapper {
-    margin-bottom: 40px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    display: inline-block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+/* --- Slider obrázkov --- */
+.image-slider {
+    position: relative; /* Nutné pre absolútne pozíciovanie obrázkov */
+    width: 100%;
+    max-width: 600px; /* Maximálna šírka slidera */
+    margin: 2rem auto; /* Centrovanie a vertikálny odstup */
+    overflow: hidden;  /* Skryje časti obrázkov mimo kontajnera */
+    border-radius: 10px; /* Zaoblené rohy slidera (upravené z 20px) */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Jemný tieň (upravené z 20px) */
+
+    /* Nastavenie pomeru strán pre responzívnu výšku */
+    /* Uprav pomer 16 / 9 podľa potreby (napr. 4 / 3, 1 / 1) */
+    /* Ak preferuješ fixnú výšku, odkomentuj 'height' a zakomentuj 'aspect-ratio' */
+    aspect-ratio: 16 / 9;
+    /* height: 350px; */ /* Alternatíva: fixná výška */
+    background-color: #eee; /* Farba pozadia pre prípad pomalého načítania */
 }
 
-.image-wrapper img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+.image-slider img {
+    position: absolute; /* Umiestnenie obrázkov na seba */
+    top: 0;
+    left: 0;
+    width: 100%; /* Vyplní šírku kontajnera */
+    height: 100%; /* Vyplní výšku kontajnera */
+    object-fit: contain; /* Zobrazí celý obrázok, môžu byť medzery */
+    opacity: 0; /* Štandardne neviditeľný */
+    transition: opacity 1s ease-in-out; /* Plynulý prechod (upravené z 1.5s pre synchronizáciu s predch. JS) */
+    border-radius: 10px; /* Zdedenie alebo nastavenie rovnakého zaoblenia ako kontajner */
 }
 
+.image-slider img.active {
+    opacity: 1; /* Aktívny obrázok je viditeľný */
+    z-index: 1; /* Zabezpečí, že je navrchu počas prechodu */
+}
+
+
+/* --- Tlačidlo --- */
 .btn {
     display: inline-block;
     background-color: var(--primary-color);
@@ -122,24 +142,27 @@ h1 {
     font-weight: 600;
     text-decoration: none;
     padding: 15px 35px;
-    border-radius: 50px;
+    border-radius: 50px; /* Okrúhle rohy tlačidla */
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    margin-top: 20px; /* Pridaný odstup nad tlačidlom */
 }
 
 .btn:hover,
 .btn:focus {
     background-color: var(--primary-hover-color);
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Jemný posun nahor pri hoveri */
     box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
     outline: none;
 }
 
+/* --- Päta stránky --- */
 .footer {
     text-align: center;
-    margin-top: auto;
+    margin-top: auto; /* Posunie pätu na spodok, ak je málo obsahu */
     padding-top: 20px;
-    position: relative; /* Aby nebolo prekryté ikonami, ak by padali až dole */
+    width: 100%; /* Aby zabrala celú šírku */
+    position: relative;
     z-index: 1;
 }
 
@@ -148,19 +171,23 @@ h1 {
     color: var(--footer-text-color);
 }
 
-/* --- Responzivita (zostáva rovnaká) --- */
+/* --- Responzivita --- */
 @media (max-width: 768px) {
     .container { padding: 30px; }
     h1 { font-size: 2rem; }
+    h2 { font-size: 1.3rem; }
     .subtitle { font-size: 1rem; }
     .btn { padding: 12px 30px; font-size: 1rem; }
+    .image-slider { max-width: 90%; /* Zväčšíme slider na menších tabletoch */ }
 }
 
 @media (max-width: 480px) {
     body { padding: 10px; }
-    .container { padding: 20px; }
+    .container { padding: 20px; margin-top: 15px; margin-bottom: 15px; }
     h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.2rem; }
     .subtitle { font-size: 0.9rem; margin-bottom: 20px; }
-    .image-wrapper { margin-bottom: 30px; }
-    .btn { padding: 10px 25px; width: 100%; }
+    .btn { padding: 10px 25px; width: 100%; font-size: 1rem; } /* Tlačidlo na celú šírku */
+    .image-slider { margin: 1.5rem auto; border-radius: 8px; } /* Menší odstup a zaoblenie */
+    .footer p { font-size: 0.8rem; }
 }
