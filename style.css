@@ -1,0 +1,166 @@
+h2 {
+    color:rgb(75, 72, 72);
+}
+
+/* --- Základné nastavenia (väčšinou zostávajú) --- */
+:root {
+    --primary-color: #007bff;
+    --primary-hover-color: #0056b3;
+    --text-color: #333;
+    --subtitle-color: #555;
+    --background-color: #f8f9fa;
+    --container-bg: #ffffff;
+    --footer-text-color: #777;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    /* Skrytie štandardného kurzora */
+    overflow-x: hidden; /* Zabráni horizontálnemu posúvaniu, ak ikony vyletia mimo */
+}
+
+/* --- Štýl pre "padajúce" ikony --- */
+.falling-icon {
+    position: fixed; /* Použijeme fixed, aby pozícia bola relatívna k oknu */
+    /* alebo absolute, ak ich chceme pridávať do iného kontajnera */
+    pointer-events: none; /* Aby ikony neblokovali interakciu */
+    z-index: 9998; /* Tesne pod prípadným vlastným kurzorom, ak by nejaký bol */
+    font-size: 1.5rem; /* Veľkosť emoji */
+    /* Animácia */
+    animation: fallAndFade 3s ease-out forwards;
+}
+
+/* --- Animácia pádu a zmiznutia --- */
+@keyframes fallAndFade {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(500px) rotate(90deg); /* Padá dole a trochu sa otáča */
+        opacity: 0;
+    }
+}
+
+/* --- Zvyšok CSS (kontajner, tlačidlo, atď.) --- */
+
+/* Skrytie štandardného kurzora pre prvky, s ktorými sa dá interagovať */
+a:hover, button:hover, .btn:hover {
+    cursor: none;
+}
+
+.container {
+    background-color: var(--container-bg);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative; /* Dôležité pre z-index, ak by ikony mali byť pod ním */
+    z-index: 1;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--subtitle-color);
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-wrapper {
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.image-wrapper img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+.footer {
+    text-align: center;
+    margin-top: auto;
+    padding-top: 20px;
+    position: relative; /* Aby nebolo prekryté ikonami, ak by padali až dole */
+    z-index: 1;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: var(--footer-text-color);
+}
+
+/* --- Responzivita (zostáva rovnaká) --- */
+@media (max-width: 768px) {
+    .container { padding: 30px; }
+    h1 { font-size: 2rem; }
+    .subtitle { font-size: 1rem; }
+    .btn { padding: 12px 30px; font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .container { padding: 20px; }
+    h1 { font-size: 1.8rem; }
+    .subtitle { font-size: 0.9rem; margin-bottom: 20px; }
+    .image-wrapper { margin-bottom: 30px; }
+    .btn { padding: 10px 25px; width: 100%; }
+}
