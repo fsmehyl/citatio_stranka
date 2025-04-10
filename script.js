@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    
     // --- ČASŤ PRE PADAJÚCE IKONY ---
     // Pole ikon (emoji), ktoré sa budú objavovať
     const icons = ['📜', '❤️', '🚀', '😀', '🧠', '💀', '🌱', '⭐', '💡', '🎉', '👍'];

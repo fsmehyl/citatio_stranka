@@ -191,3 +191,39 @@ h2 {
     .image-slider { margin: 1.5rem auto; border-radius: 8px; } /* Menší odstup a zaoblenie */
     .footer p { font-size: 0.8rem; }
 }
+
+ /* Vylepšené CSS štýly pre kruhy - pridajte alebo upravte v style.css */
+ .features-container {
+    display: flex; /* Zarovná kruhy vedľa seba */
+    justify-content: space-around; /* Rozmiestni kruhy rovnomerne */
+    align-items: center; /* Zarovná obsah kruhov na stred vertikálne */
+    flex-wrap: wrap; /* Zalomenie na menších obrazovkách */
+    margin: 40px 0; /* Väčšie odsadenie od okolitých prvkov */
+    padding: 0 10px; /* Malé bočné odsadenie, aby sa nedotýkali okraja */
+    text-align: center;
+}
+
+.feature-circle {
+    border: 1.5px solid #ddd; /* Tenší a svetlejší sivý okraj */
+    border-radius: 50%; /* Vytvorí kruhový tvar */
+    width: 170px;  /* Mierne menšia šírka kruhu */
+    height: 170px; /* Mierne menšia výška kruhu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Upravené vnútorné odsadenie */
+    margin: 15px; /* Odsadenie medzi kruhmi */
+    box-sizing: border-box;
+    font-size: 0.95em; /* Prípadná úprava veľkosti písma */
+    color: #555; /* Tmavšia sivá farba textu */
+    /* Pridanie jemného tieňa pre lepší vizuálny efekt (voliteľné) */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     /* Prechod pre prípadné hover efekty (voliteľné) */
+    transition: transform 0.2s ease-in-out;
+}
+
+ /* Voliteľný hover efekt */
+.feature-circle:hover {
+    transform: scale(1.05);
+    border-color: #bbb;
+}
