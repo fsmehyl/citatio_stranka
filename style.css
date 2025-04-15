@@ -227,3 +227,81 @@ h2 {
     transform: scale(1.05);
     border-color: #bbb;
 }
+
+.notebook-wrapper {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 0 auto 40px auto;
+}
+
+.notebook-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 1;
+    position: relative;
+}
+
+/* Slider vo vnútri notebooku */
+.image-slider-inside {
+    position: absolute;
+    top: 12%;    /* Nastav podľa toho, kde je obrazovka notebooku */
+    left: 12%;
+    width: 76%;
+    height: 75%;
+    z-index: 2;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.image-slider-inside img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* alebo cover podľa potreby */
+  display: block;
+  position: absolute;
+}
+
+.image-slider-inside img.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.emoji {
+    font-size: 22px;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+
+
+
+.reviews-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.review-item {
+    flex: 1 1 400px;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.review-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
