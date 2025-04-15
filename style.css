@@ -195,7 +195,7 @@ h2 {
  /* Vylepšené CSS štýly pre kruhy - pridajte alebo upravte v style.css */
  .features-container {
     display: flex; /* Zarovná kruhy vedľa seba */
-    justify-content: space-around; /* Rozmiestni kruhy rovnomerne */
+    justify-content: center; /* Rozmiestni kruhy rovnomerne */
     align-items: center; /* Zarovná obsah kruhov na stred vertikálne */
     flex-wrap: wrap; /* Zalomenie na menších obrazovkách */
     margin: 40px 0; /* Väčšie odsadenie od okolitých prvkov */
