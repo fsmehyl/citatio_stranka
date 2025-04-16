@@ -230,8 +230,10 @@ h2 {
 
 .notebook-wrapper {
     position: relative;
-    width: 600px;
-    height: 400px;
+    width: 100%; /* Zmena z fixnej šírky 600px na percentuálnu */
+    max-width: 600px; /* Maximálna šírka */
+    height: auto; /* Zmena z fixnej výšky */
+    aspect-ratio: 3/2; /* Pomer strán 3:2 (600/400) */
     margin: 0 auto 40px auto;
 }
 
@@ -246,7 +248,7 @@ h2 {
 /* Slider vo vnútri notebooku */
 .image-slider-inside {
     position: absolute;
-    top: 12%;    /* Nastav podľa toho, kde je obrazovka notebooku */
+    top: 12%;
     left: 12%;
     width: 76%;
     height: 75%;
@@ -255,11 +257,13 @@ h2 {
 }
 
 .image-slider-inside img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;  /* alebo cover podľa potreby */
-  display: block;
-  position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 .image-slider-inside img.active {
@@ -304,4 +308,66 @@ h2 {
 .review-item:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+
+
+
+@media (max-width: 768px) {
+    .notebook-wrapper {
+        max-width: 100%;
+        margin: 0 auto 30px auto;
+    }
+    
+    .image-slider-inside {
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 75%;
+    }
+    
+    .features-container {
+        gap: 10px;
+    }
+    
+    .feature-circle {
+        width: 140px;
+        height: 140px;
+        margin: 10px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    .notebook-wrapper {
+        margin-bottom: 20px;
+    }
+    
+    .image-slider-inside {
+        top: 8%;
+        left: 8%;
+        width: 84%;
+        height: 75%;
+    }
+    
+    .features-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .feature-circle {
+        width: 120px;
+        height: 120px;
+        margin: 8px;
+        font-size: 0.8em;
+    }
+    
+    .reviews-container {
+        gap: 20px;
+    }
+    
+    .review-item {
+        flex: 1 1 100%;
+    }
 }
