@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    
     // --- ČASŤ PRE PADAJÚCE IKONY ---
     // Pole ikon (emoji), ktoré sa budú objavovať
     const icons = ['📜', '❤️', '🚀', '😀', '🧠', '💀', '🌱', '⭐', '💡', '🎉', '👍'];
@@ -51,57 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- ČASŤ PRE SLIDER OBRÁZKOV ---
+    const images = document.querySelectorAll(".image-slider-inside img");
+    let current = 0;
 
-    // Vyberieme všetky obrázky vnútri kontajnera .image-slider
-    // *** TOTO JE HLAVNÁ ZMENA v selektore ***
-    const slides = document.querySelectorAll('.image-slider img');
-    let currentSlideIndex = 0;
-    const slideInterval = 4000; // Interval v milisekundách (4 sekundy)
-
-    // Funkcia na zobrazenie konkrétneho slajdu
-    function showSlide(index) {
-        // Skontrolujeme, či máme nejaké slajdy
-        if (slides.length === 0) return;
-
-        // Skryjeme všetky slajdy odstránením triedy 'active'
-        slides.forEach(slide => {
-            slide.classList.remove('active');
-        });
-
-        // Zabezpečíme, že index je vždy platný (pre prípad chyby)
-        const validIndex = (index % slides.length + slides.length) % slides.length;
-
-        // Zobrazíme slajd na danom indexe pridaním triedy 'active'
-        if (slides[validIndex]) {
-            slides[validIndex].classList.add('active');
-        }
-    }
-
-    // Funkcia na zobrazenie nasledujúceho slajdu
-    function nextSlide() {
-        // Prejdeme na ďalší index
-        currentSlideIndex = (currentSlideIndex + 1) % slides.length; // Modulo zabezpečí zacyklenie
-        showSlide(currentSlideIndex);
-    }
-
-    // Inicializácia slidera
-    if (slides.length > 0) {
-        // Uistíme sa, že na začiatku má triedu 'active' iba prvý obrázok
-        // (HTML by to malo zabezpečiť, ale pre istotu)
-        slides.forEach((slide, index) => {
-            if (index === 0) {
-                slide.classList.add('active');
-            } else {
-                slide.classList.remove('active');
-            }
-        });
-        currentSlideIndex = 0; // Reset indexu pre istotu
-
-        // Nastavíme interval pre automatické prepínanie
-        setInterval(nextSlide, slideInterval);
-    } else {
-        // Vypíšeme do konzoly, ak sa nenašli žiadne obrázky v slideri
-        console.log("Nenašli sa žiadne obrázky pre slider v elemente '.image-slider'.");
-    }
+    setInterval(() => {
+        images[current].classList.remove("active");
+        current = (current + 1) % images.length;
+        images[current].classList.add("active");
+    }, 3000); // Každé 3 sekundy
 });
